@@ -85,7 +85,7 @@ except:
 # 3. Renderizado de Encabezado
 st.markdown('''
     <div class="header-container">
-        <p class="logo-text">C & J</p>
+        <p class="logo-text">J&C</p>
         <p class="names-text">Joseline & Carlos</p>
     </div>
     ''', unsafe_allow_html=True)
