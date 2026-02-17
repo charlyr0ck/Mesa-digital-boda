@@ -201,4 +201,3 @@ with st.expander("🔐 Panel de Control"):
             st.dataframe(df_ver)
         except:
             st.info("Aún no hay mensajes registrados.")
-    """, unsafe_allow_html=True)
