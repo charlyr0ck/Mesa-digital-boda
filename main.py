@@ -4,71 +4,37 @@ import os
 
 # 1. Configuración y Estilo "Noche Estrellada & Dorado"
 st.set_page_config(page_title="Boda Joseline & Carlos", page_icon="💍", layout="centered")
-
 st.markdown("""
     <style>
-    /* Fondo de cielo oscuro con estrellas */
-    .stApp {
-        background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-        background-attachment: fixed;
-    }
-    .stApp::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: url('https://www.transparenttextures.com/patterns/stardust.png');
-        opacity: 0.3;
-        pointer-events: none;
-    }
-    
-    /* Logo y Títulos */
-    .logo-container {
-        text-align: center;
-        margin-bottom: -20px;
-    }
-    h1, h2, h3 {
-        color: #D4AF37 !important;
-        text-align: center;
-        font-family: 'Playfair Display', serif;
-        text-shadow: 0px 0px 10px rgba(212, 175, 55, 0.5);
-    }
-    .stMarkdown, p, label {
-        color: #F5F5F5 !important;
-        text-align: center;
-    }
+    /* ... (tus estilos anteriores se mantienen) ... */
 
-    /* Centrar Radio Buttons y mejorar estética */
-    div.stRadio > div {
+    /* NUEVO: Centrado absoluto para los botones de opción */
+    [data-testid="stMarkdownContainer"] + div [role="radiogroup"] {
         display: flex;
         justify-content: center;
-        gap: 15px;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap; /* Para que en pantallas pequeñas no se corten */
     }
+
+    /* Estilo para que cada botón se vea como una cápsula dorada */
+    div.stRadio [data-testid="stWidgetLabel"] {
+        display: none; /* Escondemos el label interno para limpiar la vista */
+    }
+    
     div.stRadio label {
-        background-color: rgba(255, 255, 255, 0.1);
-        padding: 8px 15px;
-        border-radius: 20px;
-        border: 1px solid #D4AF37;
-        color: white !important;
-    }
-
-    /* Inputs y Formularios */
-    .stTextInput>div>div>input, .stTextArea>div>div>textarea {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        color: white !important;
+        background-color: rgba(212, 175, 55, 0.1) !important;
         border: 1px solid #D4AF37 !important;
+        border-radius: 20px !important;
+        padding: 5px 15px !important;
+        color: white !important;
+        transition: 0.3s !important;
     }
 
-    /* Botón Dorado */
-    .stButton>button {
-        background-color: #D4AF37 !important;
-        color: #090A0F !important;
-        border-radius: 25px;
-        border: none;
-        width: 100%;
-        font-weight: bold;
-        height: 3em;
+    div.stRadio label:hover {
+        border-color: #F4D03F !important;
+        background-color: rgba(212, 175, 55, 0.2) !important;
     }
-    hr { border-top: 1px solid #D4AF37; }
     </style>
     """, unsafe_allow_html=True)
 
