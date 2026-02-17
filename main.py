@@ -53,9 +53,9 @@ st.subheader("✨ Nuestra Mesa de Regalos Digital ✨")
 
 # 3. Datos de Regalos (Sustituye con tus links reales)
 DATA_REGALOS = {
-    "$500": {"link": "https://mpago.li/2FdE5fx", "img": "gracias_500.jpeg"},
-    "$1000": {"link": "https://mpago.li/2Zeechq", "img": "gracias_1000.jpeg"},
-    "$1500": {"link": "https://mpago.li/2E5Rjr1", "img": "gracias_1500.jpeg"}
+    "$500": {"link": "https://mpago.li/2FdE5fx", "img": "gracias_500.png"},
+    "$1000": {"link": "https://mpago.li/2Zeechq", "img": "gracias_1000.png"},
+    "$1500": {"link": "https://mpago.li/2E5Rjr1", "img": "gracias_1500.png"}
 }
 
 monto = st.select_slider("Selecciona el monto de tu regalo:", options=["$500", "$1000", "$1500"])
