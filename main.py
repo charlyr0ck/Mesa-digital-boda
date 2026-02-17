@@ -1,4 +1,3 @@
-
 import streamlit as st
 import datetime
 import os
@@ -8,6 +7,7 @@ st.set_page_config(page_title="Boda Joseline & Carlos", page_icon="💍", layout
 
 st.markdown("""
     <style>
+    /* Fondo de cielo oscuro con estrellas */
     .stApp {
         background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
         background-attachment: fixed;
@@ -20,6 +20,8 @@ st.markdown("""
         opacity: 0.3;
         pointer-events: none;
     }
+    
+    /* Títulos y textos */
     h1, h2, h3 {
         color: #D4AF37 !important;
         text-align: center;
@@ -30,11 +32,29 @@ st.markdown("""
         color: #F5F5F5 !important;
         text-align: center;
     }
+
+    /* Estilo para los botones de opción (Radio) */
+    div.stRadio > div {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    div.stRadio label {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 10px 20px;
+        border-radius: 15px;
+        border: 1px solid #D4AF37;
+        transition: 0.3s;
+    }
+
+    /* Input boxes */
     .stTextInput>div>div>input, .stTextArea>div>div>textarea {
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: white !important;
         border: 1px solid #D4AF37 !important;
     }
+
+    /* Botón principal */
     .stButton>button {
         background-color: #D4AF37 !important;
         color: #090A0F !important;
@@ -50,22 +70,43 @@ st.markdown("""
 # 2. Encabezado
 st.title("JOSELINE & CARLOS")
 st.subheader("✨ Nuestra Mesa de Regalos Digital ✨")
+st.write("Tu presencia es nuestro mayor regalo, pero si deseas tener un detalle, puedes elegir una opción abajo:")
 
-# 3. Datos de Regalos (Sustituye con tus links reales)
+# 3. Datos de Regalos (Configurado con tus archivos .jpeg)
 DATA_REGALOS = {
-    "$500": {"link": "https://mpago.li/2FdE5fx", "img": "gracias_500.png"},
-    "$1000": {"link": "https://mpago.li/2Zeechq", "img": "gracias_1000.png"},
-    "$1500": {"link": "https://mpago.li/2E5Rjr1", "img": "gracias_1500.png"}
+    "$500": {"link": "https://mpago.li/2FdE5fx", "img": "gracias_500.jpeg"},
+    "$1000": {"link": "https://mpago.li/2Zeechq", "img": "gracias_1000.jpeg"},
+    "$1500": {"link": "https://mpago.li/2E5Rjr1", "img": "gracias_1500.jpeg"}
 }
 
-monto = st.select_slider("Selecciona el monto de tu regalo:", options=["$500", "$1000", "$1500"])
+# 4. Selección del Regalo (Interfaz mejorada con Radio Buttons)
+st.write("### 🎁 Paso 1: Elige el monto")
+monto = st.radio(
+    "Selecciona el monto de tu regalo:",
+    options=["$500", "$1000", "$1500"],
+    horizontal=True,
+    label_visibility="collapsed"
+)
+
+# Espacio visual y visualización de tarjeta
+st.write(f"Has seleccionado la opción de **{monto}**")
 st.image(DATA_REGALOS[monto]["img"], use_container_width=True)
 
-# Botón de Pago
+# 5. Botón de Pago Mercado Pago
 url_pago = DATA_REGALOS[monto]["link"]
-st.markdown(f'<a href="{url_pago}" target="_blank" style="text-decoration: none;"><div style="background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%); color: #090A0F; padding: 15px; border-radius: 30px; text-align: center; font-weight: bold; font-size: 20px; margin: 20px 0px; box-shadow: 0px 4px 15px rgba(0,0,0,0.3);">🎁 Regalar Tarjeta de {monto}</div></a>', unsafe_allow_html=True)
+st.markdown(f'''
+    <a href="{url_pago}" target="_blank" style="text-decoration: none;">
+        <div style="background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%); 
+                    color: #090A0F; padding: 15px; border-radius: 30px; 
+                    text-align: center; font-weight: bold; font-size: 20px; 
+                    margin: 20px 0px; box-shadow: 0px 4px 15px rgba(0,0,0,0.3);">
+            🎁 Regalar Tarjeta de {monto}
+        </div>
+    </a>
+    ''', unsafe_allow_html=True)
+st.caption("Al hacer clic, se abrirá la plataforma segura de Mercado Pago.")
 
-# 4. Libro de Mensajes
+# 6. Libro de Mensajes
 st.divider()
 st.subheader("✍️ Déjanos un mensaje en las estrellas")
 with st.form("libro_oro"):
@@ -81,12 +122,14 @@ if confirmar:
             f.write(registro)
         st.success(f"¡Gracias {nombre}! Tu mensaje ha sido guardado. ❤️")
         st.balloons()
+    else:
+        st.error("Por favor, escribe tu nombre y un mensaje antes de enviar.")
 
-# 5. SECCIÓN PRIVADA PARA LOS NOVIOS
+# 7. SECCIÓN PRIVADA PARA LOS NOVIOS
 st.write("---")
 with st.expander("🔐 Acceso Privado (Solo Novios)"):
     clave = st.text_input("Contraseña:", type="password")
-    if clave == "Boda2026": # <--- Puedes cambiar esta contraseña
+    if clave == "Boda2026":
         st.write("### 📜 Libro de Visitas Digital")
         if os.path.exists("mensajes_boda.txt"):
             with open("mensajes_boda.txt", "r", encoding="utf-8") as f:
