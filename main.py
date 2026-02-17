@@ -23,97 +23,80 @@ st.markdown("""
         pointer-events: none;
     }
     
-    /* Encabezado Cursivo GIGANTE y Dorado Metálico */
+    /* ENCABEZADO: Forzamos el tamaño con !important */
     .header-container {
         text-align: center;
-        margin-bottom: 120px;
-        padding-top: 80px;
+        width: 100%;
+        padding: 40px 0 20px 0;
     }
     .logo-text {
-        font-family: 'Great Vibes', cursive;
-        color: #E6BE8A; /* Tono Champagne Gold */
-        font-size: 130px; /* Tamaño máximo impacto */
-        text-shadow: 0px 0px 25px rgba(230, 190, 138, 0.6);
-        margin: 0;
-        line-height: 0.7;
+        font-family: 'Great Vibes', cursive !important;
+        color: #E6BE8A !important;
+        font-size: 150px !important; /* Aún más grande */
+        text-shadow: 0px 0px 30px rgba(230, 190, 138, 0.7) !important;
+        margin: 0 !important;
+        line-height: 0.6 !important;
     }
     .names-text {
-        font-family: 'Great Vibes', cursive;
-        color: #D4AF37; /* Dorado Clásico */
-        font-size: 85px; /* Tamaño máximo impacto */
-        text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.5);
-        margin-top: 5px;
-        line-height: 1.1;
+        font-family: 'Great Vibes', cursive !important;
+        color: #D4AF37 !important;
+        font-size: 90px !important; /* Aún más grande */
+        text-shadow: 0px 0px 20px rgba(212, 175, 55, 0.5) !important;
+        margin-top: 20px !important;
+        line-height: 1 !important;
     }
 
-    /* Estilos de texto general */
-    h3, .stMarkdown, p, label {
-        color: #F5F5F5 !important;
-        text-align: center;
-        font-family: 'Playfair Display', serif;
-    }
-
-    /* CENTRADO ABSOLUTO DE BOTONES (Radio Buttons) */
-    div.stRadio > div {
+    /* CENTRADO DE BOTONES: Selector ultra-específico */
+    div[data-testid="stRadio"] > div[role="radiogroup"] {
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
         flex-direction: row !important;
         flex-wrap: wrap !important;
-        gap: 15px !important;
+        gap: 20px !important;
         width: 100% !important;
+        margin: 0 auto !important;
     }
     
-    /* Estilo de cápsulas para los botones */
-    div.stRadio label {
+    /* Estilo de los botones */
+    div[data-testid="stRadio"] label {
         background-color: rgba(212, 175, 55, 0.1) !important;
-        border: 1px solid #D4AF37 !important;
-        border-radius: 30px !important;
-        padding: 12px 30px !important;
+        border: 2px solid #D4AF37 !important;
+        border-radius: 35px !important;
+        padding: 15px 40px !important;
         color: white !important;
-        transition: 0.3s ease;
-        font-weight: bold;
-        cursor: pointer;
-        font-size: 18px !important;
+        transition: 0.3s ease !important;
+        font-weight: bold !important;
+        font-size: 22px !important; /* Texto del botón más legible */
     }
     
-    div.stRadio label:hover {
-        background-color: rgba(212, 175, 55, 0.3) !important;
-        transform: scale(1.05);
-        box-shadow: 0px 0px 15px rgba(212, 175, 55, 0.4);
+    div[data-testid="stRadio"] label:hover {
+        background-color: rgba(212, 175, 55, 0.4) !important;
+        transform: scale(1.08);
     }
 
-    /* Ocultar elementos nativos de Streamlit */
-    div.stRadio [data-testid="stWidgetLabel"] { display: none; }
-    div.stRadio input[type="radio"] { display: none; }
+    /* Ocultar el círculo blanco original de Streamlit */
+    div[data-testid="stRadio"] div[data-testid="stMarkdownContainer"] { display: none !important; }
+    div[data-testid="stRadio"] input { display: none !important; }
 
-    /* Inputs y Formularios */
-    .stTextInput>div>div>input, .stTextArea>div>div>textarea {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        color: white !important;
-        border: 1px solid #D4AF37 !important;
-        text-align: left !important;
+    /* Estilos de texto general */
+    h3, .stMarkdown, p {
+        color: #F5F5F5 !important;
+        text-align: center !important;
+        font-family: 'Playfair Display', serif;
     }
 
-    /* Botón Dorado de Pago Mejorado */
+    /* Botón Dorado de Pago */
     .stButton>button {
         background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%) !important;
         color: #090A0F !important;
-        border-radius: 35px !important;
-        border: none !important;
-        width: 100% !important;
+        border-radius: 40px !important;
         font-weight: bold !important;
-        height: 3.8em !important;
-        font-size: 22px !important;
-        transition: 0.3s !important;
-        box-shadow: 0px 5px 20px rgba(0,0,0,0.4) !important;
-    }
-    .stButton>button:hover {
-        box-shadow: 0px 0px 25px rgba(212, 175, 55, 0.6) !important;
-        transform: translateY(-2px);
+        height: 4em !important;
+        font-size: 24px !important;
     }
     
-    hr { border-top: 2px solid rgba(212, 175, 55, 0.5); }
+    hr { border-top: 2px solid rgba(212, 175, 55, 0.6); }
     </style>
     """, unsafe_allow_html=True)
 
@@ -138,11 +121,7 @@ DATA_REGALOS = {
 # 4. Selección del Regalo
 st.write("---")
 st.write("### 🎁 Elige el monto de tu regalo")
-monto = st.radio(
-    "Selección",
-    options=["$500", "$1,000", "$1,500"],
-    horizontal=True
-)
+monto = st.radio("Seleccion", options=["$500", "$1,000", "$1,500"], horizontal=True, label_visibility="collapsed")
 
 # Mostrar la tarjeta centrada
 col1, col2, col3 = st.columns([0.1, 2, 0.1])
@@ -150,16 +129,16 @@ with col2:
     if os.path.exists(DATA_REGALOS[monto]["img"]):
         st.image(DATA_REGALOS[monto]["img"], use_container_width=True)
     else:
-        st.warning(f"Cargando imagen de {monto}... (Verifica que sea {DATA_REGALOS[monto]['img']})")
+        st.warning(f"Cargando imagen de {monto}...")
 
 # 5. Botón de Pago Mercado Pago
 url_pago = DATA_REGALOS[monto]["link"]
 st.markdown(f'''
     <a href="{url_pago}" target="_blank" style="text-decoration: none;">
         <div style="background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%); 
-                    color: #090A0F; padding: 20px; border-radius: 40px; 
-                    text-align: center; font-weight: bold; font-size: 24px; 
-                    margin: 15px 0px; box-shadow: 0px 8px 25px rgba(212, 175, 55, 0.4);">
+                    color: #090A0F; padding: 25px; border-radius: 45px; 
+                    text-align: center; font-weight: bold; font-size: 26px; 
+                    margin: 15px 0px; box-shadow: 0px 8px 30px rgba(212, 175, 55, 0.5);">
             Regalar Tarjeta de {monto} 💳
         </div>
     </a>
@@ -181,16 +160,11 @@ if confirmar:
             f.write(registro)
         st.success(f"¡Gracias {nombre}! Tu mensaje ha sido guardado. ❤️")
         st.balloons()
-    else:
-        st.error("Por favor, completa los campos para enviar tu mensaje.")
 
 # 7. Acceso Privado
 with st.expander("🔐 Acceso Privado"):
     clave = st.text_input("Contraseña:", type="password")
     if clave == "Boda2026":
-        st.write("### 📜 Mensajes Recibidos")
         if os.path.exists("mensajes_boda.txt"):
             with open("mensajes_boda.txt", "r", encoding="utf-8") as f:
-                st.text_area("Lectura de mensajes:", f.read(), height=300)
-        else:
-            st.info("Aún no hay mensajes registrados.")
+                st.text_area("Mensajes:", f.read(), height=300)
