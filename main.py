@@ -104,13 +104,13 @@ except:
 # 3. Encabezado
 st.markdown('''
     <div class="header-container">
-        <p class="logo-text">Nuestro día</p>
+        <p class="names-text">Nuestro día</p>
         <p class="names-text">Joseline & Carlos</p>
     </div>
     ''', unsafe_allow_html=True)
 
 st.subheader("✨ Nuestra Mesa de Regalos Digital ✨")
-st.write("Tu presencia ilumina nuestro universo. Si deseas tener un detalle con nosotros, puedes elegir una de las opciones.")
+st.write("Tu presencia ilumina nuestro universo. Si deseas tener un detalle con nosotros, puedes elegir una de las siguientes tarjetas:")
 
 # 4. Datos y Selección de Regalo
 DATA_REGALOS = {
@@ -120,7 +120,7 @@ DATA_REGALOS = {
     "$1,500": {"link": "https://mpago.li/2E5Rjr1", "img": "gracias_1500.png"}
 }
 
-st.write("### 🎁 Mesa de Regalos (Opcional)")
+st.write("### 🎁 Mesa de Regalos Digital (Opcional)")
 # Añadimos la opción "Ninguna" por defecto
 monto = st.radio("Monto", options=["Ninguna", "$500", "$1,000", "$1,500"], horizontal=True, label_visibility="collapsed")
 
