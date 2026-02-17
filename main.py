@@ -3,7 +3,7 @@ import datetime
 import os
 
 # 1. Configuración y Estilo "Noche Estrellada & Dorado Pro"
-st.set_page_config(page_title="Boda Joseline & Carlos", page_icon="💍", layout="centered")
+st.set_page_config(page_title="Boda Carlos y Joseline", page_icon="💍", layout="centered")
 
 st.markdown("""
     <style>
@@ -32,7 +32,7 @@ st.markdown("""
     .logo-text {
         font-family: 'Great Vibes', cursive !important;
         color: #E6BE8A !important;
-        font-size: 150px !important; /* Aún más grande */
+        font-size: 120px !important; /* Aún más grande */
         text-shadow: 0px 0px 30px rgba(230, 190, 138, 0.7) !important;
         margin: 0 !important;
         line-height: 0.6 !important;
@@ -40,7 +40,7 @@ st.markdown("""
     .names-text {
         font-family: 'Great Vibes', cursive !important;
         color: #D4AF37 !important;
-        font-size: 90px !important; /* Aún más grande */
+        font-size: 70px !important; /* Aún más grande */
         text-shadow: 0px 0px 20px rgba(212, 175, 55, 0.5) !important;
         margin-top: 20px !important;
         line-height: 1 !important;
