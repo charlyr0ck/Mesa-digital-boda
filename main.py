@@ -4,7 +4,7 @@ import datetime
 import pandas as pd
 import os
 
-# 1. Configuración de Página y Estilo "Universal"
+# 1. Configuración de Página y Estilo Corregido
 st.set_page_config(page_title="Boda Joseline & Carlos", page_icon="💍", layout="centered")
 
 st.markdown("""
@@ -25,58 +25,72 @@ st.markdown("""
         pointer-events: none;
     }
 
-    /* LIMITADOR DE ANCHO PARA WEB: Aquí ocurre la magia */
+    /* Contenedor Principal Limitado para Web y Móvil */
     [data-testid="stAppViewBlockContainer"] {
-        max-width: 600px !important; /* Mantiene el look de smartphone en PC */
+        max-width: 550px !important;
         padding-top: 2rem !important;
-        padding-bottom: 2rem !important;
         margin: auto !important;
     }
     
-    /* Logo y Nombres ajustados */
-    .header-container { text-align: center; padding-top: 10px; }
+    /* ENCABEZADO */
+    .header-container { text-align: center; }
     .logo-text {
         font-family: 'Great Vibes', cursive !important;
         color: #E6BE8A !important;
-        font-size: 100px !important;
-        text-shadow: 0px 0px 20px rgba(230, 190, 138, 0.6);
+        font-size: 90px !important;
+        text-shadow: 0px 0px 20px rgba(230, 190, 138, 0.6) !important;
         margin: 0 !important;
         line-height: 0.8 !important;
     }
     .names-text {
         font-family: 'Great Vibes', cursive !important;
         color: #D4AF37 !important;
-        font-size: 65px !important;
+        font-size: 60px !important;
+        text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.4) !important;
         margin-top: 10px !important;
         line-height: 1 !important;
     }
 
-    /* BOTONES: Centrados y Responsivos */
+    /* SECCIÓN DE BOTONES: Corrección de Texto Cortado */
     div[data-testid="stRadio"] > div[role="radiogroup"] {
         display: flex !important;
         justify-content: center !important;
-        gap: 10px !important;
-        flex-wrap: nowrap !important; /* Evita que se amontonen */
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100% !important;
     }
     
     div[data-testid="stRadio"] label {
         background-color: rgba(212, 175, 55, 0.1) !important;
         border: 2px solid #D4AF37 !important;
         border-radius: 30px !important;
-        padding: 8px 15px !important;
+        padding: 8px 4px !important; 
         color: white !important;
-        flex: 1 !important; /* Hace que todos midan lo mismo */
-        text-align: center !important;
+        flex: 1 !important;
+        min-width: 95px !important; /* Asegura que quepa el texto */
+        max-width: 120px !important;
+        height: 45px !important; 
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        cursor: pointer !important;
     }
-    
+
+    /* Forzar que el texto no se rompa y se mantenga en una línea */
     div[data-testid="stRadio"] label p {
         font-size: 18px !important;
         font-weight: bold !important;
         color: white !important;
         margin: 0 !important;
+        white-space: nowrap !important; /* EVITA EL SALTO DE LÍNEA */
+        overflow: visible !important;
     }
 
-    div[data-testid="stRadio"] input { display: none !important; }
+    /* Ocultar el círculo nativo */
+    div[data-testid="stRadio"] input {
+        position: absolute !important;
+        opacity: 0 !important;
+    }
 
     /* Botón Dorado de Pago */
     .stButton>button {
@@ -86,22 +100,23 @@ st.markdown("""
         font-weight: bold !important;
         height: 3.5em !important;
         font-size: 20px !important;
-        border: none !important;
         width: 100% !important;
+        border: none !important;
     }
 
     h3, .stMarkdown, p {
         color: #F5F5F5 !important;
+        text-align: center !important;
         font-family: 'Playfair Display', serif;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# 2. Conexión a Base de Datos
+# 2. Conexión a Google Sheets
 try:
     conn = st.connection("gsheets", type=GSheetsConnection)
 except:
-    st.error("Error al conectar con la base de datos de Google.")
+    st.error("Error de conexión. Revisa tus Secrets.")
 
 # 3. Encabezado
 st.markdown('''
@@ -112,7 +127,6 @@ st.markdown('''
     ''', unsafe_allow_html=True)
 
 st.subheader("✨ Nuestra Mesa de Regalos Digital ✨")
-st.write("Tu presencia ilumina nuestro universo. Si deseas tener un detalle con nosotros, puedes elegir una de las opciones.")
 
 # 4. Datos de Regalos
 DATA_REGALOS = {
@@ -122,27 +136,25 @@ DATA_REGALOS = {
 }
 
 st.write("### 🎁 Elige el monto de tu regalo")
-monto = st.radio("Seleccion", options=["$500", "$1,000", "$1,500"], horizontal=True, label_visibility="collapsed")
+# IMPORTANTE: No pongas espacios extra en los nombres de las opciones
+monto = st.radio("Monto", options=["$500", "$1,000", "$1,500"], horizontal=True, label_visibility="collapsed")
 
-# Visualización de Tarjeta
+# 5. Imagen y Botón de Pago
 if os.path.exists(DATA_REGALOS[monto]["img"]):
     st.image(DATA_REGALOS[monto]["img"], use_container_width=True)
-else:
-    st.info(f"Has seleccionado la tarjeta de {monto}")
 
-# 5. Botón de Pago
 st.markdown(f'''
     <a href="{DATA_REGALOS[monto]["link"]}" target="_blank" style="text-decoration: none;">
         <div style="background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%); 
-                    color: #090A0F; padding: 18px; border-radius: 40px; 
+                    color: #090A0F; padding: 20px; border-radius: 40px; 
                     text-align: center; font-weight: bold; font-size: 22px; 
-                    margin: 15px 0px; box-shadow: 0px 5px 15px rgba(212, 175, 55, 0.4);">
+                    margin: 15px 0px; box-shadow: 0px 8px 25px rgba(212, 175, 55, 0.4);">
             Regalar Tarjeta de {monto} 💳
         </div>
     </a>
     ''', unsafe_allow_html=True)
 
-# 6. Formulario Automático
+# 6. Formulario de Mensajes
 st.divider()
 st.subheader("✍️ Déjanos un mensaje en las estrellas")
 with st.form("libro_oro", clear_on_submit=True):
@@ -155,19 +167,7 @@ with st.form("libro_oro", clear_on_submit=True):
                 nueva_fila = pd.DataFrame([{"Fecha": datetime.datetime.now().strftime("%d/%m/%Y %H:%M"), "Nombre": nombre, "Monto": monto, "Mensaje": mensaje}])
                 df_final = pd.concat([df_actual, nueva_fila], ignore_index=True)
                 conn.update(data=df_final)
-                st.success("¡Tu mensaje se ha guardado eternamente! ❤️")
+                st.success("¡Mensaje guardado! ❤️")
                 st.balloons()
             except:
-                st.error("No se pudo conectar con la base de datos. ¡Revisa tus Secrets!")
-        else:
-            st.error("Por favor, llena todos los campos.")
-
-# 7. Panel de Control
-with st.expander("🔐 Panel de Control"):
-    clave = st.text_input("Contraseña:", type="password")
-    if clave == "Boda2026":
-        try:
-            df_ver = conn.read()
-            st.dataframe(df_ver)
-        except:
-            st.info("No hay datos para mostrar.")
+                st.error("Error al guardar. Verifica los permisos de la hoja.")
