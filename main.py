@@ -26,8 +26,8 @@ st.markdown("""
     /* Encabezado Cursivo GIGANTE y Dorado Metálico */
     .header-container {
         text-align: center;
-        margin-bottom: 30px;
-        padding-top: 20px;
+        margin-bottom: 120px;
+        padding-top: 80px;
     }
     .logo-text {
         font-family: 'Great Vibes', cursive;
