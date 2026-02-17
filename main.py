@@ -2,8 +2,8 @@ import streamlit as st
 import datetime
 import os
 
-# 1. Configuración y Estilo "Noche Estrellada & Dorado Pro"
-st.set_page_config(page_title="Boda Carlos y Joseline", page_icon="💍", layout="centered")
+# 1. Configuración y Estilo "Noche Estrellada & Dorado Final"
+st.set_page_config(page_title="Boda Joseline & Carlos", page_icon="💍", layout="centered")
 
 st.markdown("""
     <style>
@@ -23,60 +23,60 @@ st.markdown("""
         pointer-events: none;
     }
     
-    /* ENCABEZADO: Forzamos el tamaño con !important */
+    /* ENCABEZADO: Tamaño equilibrado y dorado champagne */
     .header-container {
         text-align: center;
         width: 100%;
-        padding: 40px 0 20px 0;
+        padding: 20px 0 10px 0;
     }
     .logo-text {
         font-family: 'Great Vibes', cursive !important;
         color: #E6BE8A !important;
-        font-size: 120px !important; /* Aún más grande */
-        text-shadow: 0px 0px 30px rgba(230, 190, 138, 0.7) !important;
+        font-size: 100px !important;
+        text-shadow: 0px 0px 25px rgba(230, 190, 138, 0.6) !important;
         margin: 0 !important;
-        line-height: 0.6 !important;
+        line-height: 0.8 !important;
     }
     .names-text {
         font-family: 'Great Vibes', cursive !important;
         color: #D4AF37 !important;
-        font-size: 70px !important; /* Aún más grande */
-        text-shadow: 0px 0px 20px rgba(212, 175, 55, 0.5) !important;
-        margin-top: 20px !important;
+        font-size: 65px !important;
+        text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.4) !important;
+        margin-top: 5px !important;
         line-height: 1 !important;
     }
 
-    /* CENTRADO DE BOTONES: Selector ultra-específico */
+    /* BOTONES: Centrado y visibilidad de montos */
     div[data-testid="stRadio"] > div[role="radiogroup"] {
         display: flex !important;
         justify-content: center !important;
-        align-items: center !important;
-        flex-direction: row !important;
-        flex-wrap: wrap !important;
-        gap: 20px !important;
+        gap: 15px !important;
         width: 100% !important;
-        margin: 0 auto !important;
+        flex-wrap: wrap !important;
     }
     
-    /* Estilo de los botones */
     div[data-testid="stRadio"] label {
         background-color: rgba(212, 175, 55, 0.1) !important;
         border: 2px solid #D4AF37 !important;
-        border-radius: 35px !important;
-        padding: 15px 40px !important;
+        border-radius: 30px !important;
+        padding: 10px 25px !important;
         color: white !important;
+        min-width: 110px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
         transition: 0.3s ease !important;
-        font-weight: bold !important;
-        font-size: 22px !important; /* Texto del botón más legible */
     }
     
-    div[data-testid="stRadio"] label:hover {
-        background-color: rgba(212, 175, 55, 0.4) !important;
-        transform: scale(1.08);
+    /* Forzamos que el texto del monto sea blanco y grande */
+    div[data-testid="stRadio"] label p {
+        font-size: 20px !important;
+        font-weight: bold !important;
+        color: white !important;
+        margin: 0 !important;
     }
 
-    /* Ocultar el círculo blanco original de Streamlit */
-    div[data-testid="stRadio"] div[data-testid="stMarkdownContainer"] { display: none !important; }
+    /* Ocultamos el círculo pero mantenemos el contenedor del texto */
     div[data-testid="stRadio"] input { display: none !important; }
 
     /* Estilos de texto general */
@@ -92,11 +92,13 @@ st.markdown("""
         color: #090A0F !important;
         border-radius: 40px !important;
         font-weight: bold !important;
-        height: 4em !important;
-        font-size: 24px !important;
+        height: 3.5em !important;
+        font-size: 22px !important;
+        margin-top: 20px;
+        border: none !important;
     }
     
-    hr { border-top: 2px solid rgba(212, 175, 55, 0.6); }
+    hr { border-top: 2px solid rgba(212, 175, 55, 0.5); }
     </style>
     """, unsafe_allow_html=True)
 
@@ -126,19 +128,20 @@ monto = st.radio("Seleccion", options=["$500", "$1,000", "$1,500"], horizontal=T
 # Mostrar la tarjeta centrada
 col1, col2, col3 = st.columns([0.1, 2, 0.1])
 with col2:
+    # Verificamos si existe el archivo para evitar errores
     if os.path.exists(DATA_REGALOS[monto]["img"]):
         st.image(DATA_REGALOS[monto]["img"], use_container_width=True)
     else:
-        st.warning(f"Cargando imagen de {monto}...")
+        st.warning(f"Cargando imagen de {monto}... Verifica que se llame {DATA_REGALOS[monto]['img']}")
 
 # 5. Botón de Pago Mercado Pago
 url_pago = DATA_REGALOS[monto]["link"]
 st.markdown(f'''
     <a href="{url_pago}" target="_blank" style="text-decoration: none;">
         <div style="background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%); 
-                    color: #090A0F; padding: 25px; border-radius: 45px; 
-                    text-align: center; font-weight: bold; font-size: 26px; 
-                    margin: 15px 0px; box-shadow: 0px 8px 30px rgba(212, 175, 55, 0.5);">
+                    color: #090A0F; padding: 20px; border-radius: 40px; 
+                    text-align: center; font-weight: bold; font-size: 24px; 
+                    margin: 15px 0px; box-shadow: 0px 8px 25px rgba(212, 175, 55, 0.4);">
             Regalar Tarjeta de {monto} 💳
         </div>
     </a>
@@ -167,4 +170,4 @@ with st.expander("🔐 Acceso Privado"):
     if clave == "Boda2026":
         if os.path.exists("mensajes_boda.txt"):
             with open("mensajes_boda.txt", "r", encoding="utf-8") as f:
-                st.text_area("Mensajes:", f.read(), height=300)
+                st.text_area("Mensajes recibidos:", f.read(), height=300)
