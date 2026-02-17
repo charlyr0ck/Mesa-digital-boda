@@ -21,7 +21,11 @@ st.markdown("""
         pointer-events: none;
     }
     
-    /* Títulos y textos */
+    /* Logo y Títulos */
+    .logo-container {
+        text-align: center;
+        margin-bottom: -20px;
+    }
     h1, h2, h3 {
         color: #D4AF37 !important;
         text-align: center;
@@ -33,28 +37,28 @@ st.markdown("""
         text-align: center;
     }
 
-    /* Estilo para los botones de opción (Radio) */
+    /* Centrar Radio Buttons y mejorar estética */
     div.stRadio > div {
         display: flex;
         justify-content: center;
-        gap: 20px;
+        gap: 15px;
     }
     div.stRadio label {
         background-color: rgba(255, 255, 255, 0.1);
-        padding: 10px 20px;
-        border-radius: 15px;
+        padding: 8px 15px;
+        border-radius: 20px;
         border: 1px solid #D4AF37;
-        transition: 0.3s;
+        color: white !important;
     }
 
-    /* Input boxes */
+    /* Inputs y Formularios */
     .stTextInput>div>div>input, .stTextArea>div>div>textarea {
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: white !important;
         border: 1px solid #D4AF37 !important;
     }
 
-    /* Botón principal */
+    /* Botón Dorado */
     .stButton>button {
         background-color: #D4AF37 !important;
         color: #090A0F !important;
@@ -62,35 +66,43 @@ st.markdown("""
         border: none;
         width: 100%;
         font-weight: bold;
+        height: 3em;
     }
     hr { border-top: 1px solid #D4AF37; }
     </style>
     """, unsafe_allow_html=True)
 
-# 2. Encabezado
+# 2. Encabezado con Logo
+# Nota: Si subes un archivo de logo a GitHub llamado 'logo.png', puedes usar st.image('logo.png', width=150)
+st.markdown('<div class="logo-container"><h1>C & J</h1></div>', unsafe_allow_html=True)
 st.title("JOSELINE & CARLOS")
 st.subheader("✨ Nuestra Mesa de Regalos Digital ✨")
-st.write("Tu presencia es nuestro mayor regalo, pero si deseas tener un detalle, puedes elegir una opción abajo:")
+st.write("Tu presencia ilumina nuestro universo. Si deseas tener un detalle con nosotros, puedes elegir una de las siguientes opciones.")
 
-# 3. Datos de Regalos (Configurado con tus archivos .jpeg)
+# 3. Datos de Regalos (Asegúrate de que los nombres coincidan con tus nuevos PNG)
 DATA_REGALOS = {
-    "$500": {"link": "https://mpago.li/2FdE5fx", "img": "gracias_500.jpeg"},
-    "$1000": {"link": "https://mpago.li/2Zeechq", "img": "gracias_1000.jpeg"},
-    "$1500": {"link": "https://mpago.li/2E5Rjr1", "img": "gracias_1500.jpeg"}
+    "$500": {"link": "https://mpago.li/2FdE5fx", "img": "gracias_500.png"},
+    "$1,000": {"link": "https://mpago.li/2Zeechq", "img": "gracias_1000.png"},
+    "$1,500": {"link": "https://mpago.li/2E5Rjr1", "img": "gracias_1500.png"}
 }
 
-# 4. Selección del Regalo (Interfaz mejorada con Radio Buttons)
-st.write("### 🎁 Paso 1: Elige el monto")
+# 4. Selección del Regalo
+st.write("---")
+st.write("### 🎁 Elige el monto de tu regalo")
 monto = st.radio(
-    "Selecciona el monto de tu regalo:",
-    options=["$500", "$1000", "$1500"],
+    "Selecciona una opción:",
+    options=["$500", "$1,000", "$1,500"],
     horizontal=True,
     label_visibility="collapsed"
 )
 
-# Espacio visual y visualización de tarjeta
-st.write(f"Has seleccionado la opción de **{monto}**")
-st.image(DATA_REGALOS[monto]["img"], use_container_width=True)
+# Mostrar la tarjeta centrada y con tamaño controlado
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    if os.path.exists(DATA_REGALOS[monto]["img"]):
+        st.image(DATA_REGALOS[monto]["img"], use_container_width=True)
+    else:
+        st.warning(f"Cargando imagen de {monto}...")
 
 # 5. Botón de Pago Mercado Pago
 url_pago = DATA_REGALOS[monto]["link"]
@@ -99,12 +111,11 @@ st.markdown(f'''
         <div style="background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%); 
                     color: #090A0F; padding: 15px; border-radius: 30px; 
                     text-align: center; font-weight: bold; font-size: 20px; 
-                    margin: 20px 0px; box-shadow: 0px 4px 15px rgba(0,0,0,0.3);">
-            🎁 Regalar Tarjeta de {monto}
+                    margin: 10px 0px; box-shadow: 0px 4px 15px rgba(0,0,0,0.3);">
+            Regalar Tarjeta de {monto} 💳
         </div>
     </a>
     ''', unsafe_allow_html=True)
-st.caption("Al hacer clic, se abrirá la plataforma segura de Mercado Pago.")
 
 # 6. Libro de Mensajes
 st.divider()
@@ -123,18 +134,15 @@ if confirmar:
         st.success(f"¡Gracias {nombre}! Tu mensaje ha sido guardado. ❤️")
         st.balloons()
     else:
-        st.error("Por favor, escribe tu nombre y un mensaje antes de enviar.")
+        st.error("Por favor, completa los campos para enviar tu mensaje.")
 
-# 7. SECCIÓN PRIVADA PARA LOS NOVIOS
-st.write("---")
-with st.expander("🔐 Acceso Privado (Solo Novios)"):
+# 7. Acceso Privado
+with st.expander("🔐 Acceso Privado"):
     clave = st.text_input("Contraseña:", type="password")
     if clave == "Boda2026":
-        st.write("### 📜 Libro de Visitas Digital")
+        st.write("### 📜 Mensajes Recibidos")
         if os.path.exists("mensajes_boda.txt"):
             with open("mensajes_boda.txt", "r", encoding="utf-8") as f:
-                contenido = f.read()
-                st.text_area("Mensajes recibidos:", contenido, height=400)
-                st.download_button("Descargar Libro de Mensajes", contenido, file_name="mensajes_boda.txt")
+                st.text_area("Lectura de mensajes:", f.read(), height=300)
         else:
-            st.info("Aún no hay mensajes registrados.")
+            st.info("Aún no hay mensajes.")
