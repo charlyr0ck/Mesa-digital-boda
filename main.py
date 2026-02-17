@@ -7,6 +7,8 @@ st.set_page_config(page_title="Boda Joseline & Carlos", page_icon="💍", layout
 
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap');
+
     /* Fondo de cielo oscuro con estrellas */
     .stApp {
         background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
@@ -21,54 +23,62 @@ st.markdown("""
         pointer-events: none;
     }
     
-    /* Logo y Títulos */
-    .logo-container {
+    /* Encabezado Cursivo */
+    .header-container {
         text-align: center;
-        margin-bottom: -10px;
+        margin-bottom: 20px;
     }
     .logo-text {
         font-family: 'Great Vibes', cursive;
         color: #D4AF37;
-        font-size: 80px;
+        font-size: 85px;
         text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.6);
         margin: 0;
+        line-height: 1;
     }
-    h1, h2, h3 {
-        color: #D4AF37 !important;
-        text-align: center;
-        font-family: 'Playfair Display', serif;
-        text-shadow: 0px 0px 10px rgba(212, 175, 55, 0.5);
+    .names-text {
+        font-family: 'Great Vibes', cursive;
+        color: #D4AF37;
+        font-size: 55px;
+        text-shadow: 0px 0px 10px rgba(212, 175, 55, 0.4);
+        margin-top: -10px;
+        line-height: 1.2;
     }
-    .stMarkdown, p, label {
+
+    /* Estilos de texto general */
+    h3, .stMarkdown, p, label {
         color: #F5F5F5 !important;
         text-align: center;
+        font-family: 'Playfair Display', serif;
     }
 
-    /* CENTRADO DE BOTONES (Radio Buttons) */
-    [data-testid="stMarkdownContainer"] + div [role="radiogroup"] {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        flex-wrap: wrap;
+    /* CENTRADO CRÍTICO DE BOTONES (Radio Buttons) */
+    div.stRadio > div {
+        display: flex !important;
+        justify-content: center !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 15px !important;
     }
-
+    
+    /* Estilo de cápsulas para los botones */
     div.stRadio label {
         background-color: rgba(212, 175, 55, 0.1) !important;
         border: 1px solid #D4AF37 !important;
         border-radius: 25px !important;
-        padding: 8px 20px !important;
+        padding: 10px 25px !important;
         color: white !important;
         transition: 0.3s ease;
         font-weight: bold;
+        cursor: pointer;
     }
-
+    
     div.stRadio label:hover {
         background-color: rgba(212, 175, 55, 0.3) !important;
         transform: scale(1.05);
     }
 
-    /* Quitar el punto del radio button original */
+    /* Ocultar elementos nativos de Streamlit en el Radio */
     div.stRadio [data-testid="stWidgetLabel"] { display: none; }
     div.stRadio input[type="radio"] { display: none; }
 
@@ -77,9 +87,10 @@ st.markdown("""
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: white !important;
         border: 1px solid #D4AF37 !important;
+        text-align: left !important;
     }
 
-    /* Botón Dorado */
+    /* Botón Dorado de Pago */
     .stButton>button {
         background-color: #D4AF37 !important;
         color: #090A0F !important;
@@ -89,16 +100,25 @@ st.markdown("""
         font-weight: bold;
         height: 3.5em;
         font-size: 18px;
+        transition: 0.3s;
     }
+    .stButton>button:hover {
+        box-shadow: 0px 0px 20px rgba(212, 175, 55, 0.5);
+        color: white !important;
+    }
+    
     hr { border-top: 1px solid #D4AF37; }
     </style>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     """, unsafe_allow_html=True)
 
-# 2. Encabezado con Logo
-st.markdown('<div class="logo-container"><p class="logo-text">C & J</p></div>', unsafe_allow_html=True)
-st.title("JOSELINE & CARLOS")
+# 2. Encabezado
+st.markdown('''
+    <div class="header-container">
+        <p class="logo-text">C & J</p>
+        <p class="names-text">Joseline & Carlos</p>
+    </div>
+    ''', unsafe_allow_html=True)
+
 st.subheader("✨ Nuestra Mesa de Regalos Digital ✨")
 st.write("Tu presencia ilumina nuestro universo. Si deseas tener un detalle con nosotros, puedes elegir una de las siguientes opciones.")
 
@@ -119,12 +139,12 @@ monto = st.radio(
 )
 
 # Mostrar la tarjeta centrada
-col1, col2, col3 = st.columns([0.5, 2, 0.5])
+col1, col2, col3 = st.columns([0.2, 2, 0.2])
 with col2:
     if os.path.exists(DATA_REGALOS[monto]["img"]):
         st.image(DATA_REGALOS[monto]["img"], use_container_width=True)
     else:
-        st.warning(f"Cargando imagen de {monto}... (Asegúrate de que se llame {DATA_REGALOS[monto]['img']})")
+        st.warning(f"Cargando imagen de {monto}... (Verifica que el archivo sea {DATA_REGALOS[monto]['img']})")
 
 # 5. Botón de Pago Mercado Pago
 url_pago = DATA_REGALOS[monto]["link"]
