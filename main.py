@@ -137,7 +137,7 @@ DATA_REGALOS = {
 
 st.write("### 🎁 Elige el monto de tu regalo")
 # IMPORTANTE: No pongas espacios extra en los nombres de las opciones
-monto = st.radio("Monto", options=["$500", "$1,000", "$1,500"], horizontal=True, label_visibility="collapsed")
+monto = st.radio(options=["$500", "$1,000", "$1,500"], horizontal=True, label_visibility="collapsed")
 
 # 5. Imagen y Botón de Pago
 if os.path.exists(DATA_REGALOS[monto]["img"]):
