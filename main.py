@@ -2,7 +2,7 @@ import streamlit as st
 import datetime
 import os
 
-# 1. Configuración y Estilo "Noche Estrellada & Dorado"
+# 1. Configuración y Estilo "Noche Estrellada & Dorado Pro"
 st.set_page_config(page_title="Boda Joseline & Carlos", page_icon="💍", layout="centered")
 
 st.markdown("""
@@ -23,26 +23,27 @@ st.markdown("""
         pointer-events: none;
     }
     
-    /* Encabezado Cursivo */
+    /* Encabezado Cursivo GIGANTE y Dorado Metálico */
     .header-container {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        padding-top: 20px;
     }
     .logo-text {
         font-family: 'Great Vibes', cursive;
-        color: #D4AF37;
-        font-size: 85px;
-        text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.6);
+        color: #E6BE8A; /* Tono Champagne Gold */
+        font-size: 130px; /* Tamaño máximo impacto */
+        text-shadow: 0px 0px 25px rgba(230, 190, 138, 0.6);
         margin: 0;
-        line-height: 1;
+        line-height: 0.7;
     }
     .names-text {
         font-family: 'Great Vibes', cursive;
-        color: #D4AF37;
-        font-size: 55px;
-        text-shadow: 0px 0px 10px rgba(212, 175, 55, 0.4);
-        margin-top: -10px;
-        line-height: 1.2;
+        color: #D4AF37; /* Dorado Clásico */
+        font-size: 85px; /* Tamaño máximo impacto */
+        text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.5);
+        margin-top: 5px;
+        line-height: 1.1;
     }
 
     /* Estilos de texto general */
@@ -52,33 +53,37 @@ st.markdown("""
         font-family: 'Playfair Display', serif;
     }
 
-    /* CENTRADO CRÍTICO DE BOTONES (Radio Buttons) */
+    /* CENTRADO ABSOLUTO DE BOTONES (Radio Buttons) */
     div.stRadio > div {
         display: flex !important;
         justify-content: center !important;
+        align-items: center !important;
         flex-direction: row !important;
         flex-wrap: wrap !important;
         gap: 15px !important;
+        width: 100% !important;
     }
     
     /* Estilo de cápsulas para los botones */
     div.stRadio label {
         background-color: rgba(212, 175, 55, 0.1) !important;
         border: 1px solid #D4AF37 !important;
-        border-radius: 25px !important;
-        padding: 10px 25px !important;
+        border-radius: 30px !important;
+        padding: 12px 30px !important;
         color: white !important;
         transition: 0.3s ease;
         font-weight: bold;
         cursor: pointer;
+        font-size: 18px !important;
     }
     
     div.stRadio label:hover {
         background-color: rgba(212, 175, 55, 0.3) !important;
         transform: scale(1.05);
+        box-shadow: 0px 0px 15px rgba(212, 175, 55, 0.4);
     }
 
-    /* Ocultar elementos nativos de Streamlit en el Radio */
+    /* Ocultar elementos nativos de Streamlit */
     div.stRadio [data-testid="stWidgetLabel"] { display: none; }
     div.stRadio input[type="radio"] { display: none; }
 
@@ -90,24 +95,25 @@ st.markdown("""
         text-align: left !important;
     }
 
-    /* Botón Dorado de Pago */
+    /* Botón Dorado de Pago Mejorado */
     .stButton>button {
-        background-color: #D4AF37 !important;
+        background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%) !important;
         color: #090A0F !important;
-        border-radius: 25px;
-        border: none;
-        width: 100%;
-        font-weight: bold;
-        height: 3.5em;
-        font-size: 18px;
-        transition: 0.3s;
+        border-radius: 35px !important;
+        border: none !important;
+        width: 100% !important;
+        font-weight: bold !important;
+        height: 3.8em !important;
+        font-size: 22px !important;
+        transition: 0.3s !important;
+        box-shadow: 0px 5px 20px rgba(0,0,0,0.4) !important;
     }
     .stButton>button:hover {
-        box-shadow: 0px 0px 20px rgba(212, 175, 55, 0.5);
-        color: white !important;
+        box-shadow: 0px 0px 25px rgba(212, 175, 55, 0.6) !important;
+        transform: translateY(-2px);
     }
     
-    hr { border-top: 1px solid #D4AF37; }
+    hr { border-top: 2px solid rgba(212, 175, 55, 0.5); }
     </style>
     """, unsafe_allow_html=True)
 
@@ -120,7 +126,7 @@ st.markdown('''
     ''', unsafe_allow_html=True)
 
 st.subheader("✨ Nuestra Mesa de Regalos Digital ✨")
-st.write("Tu presencia ilumina nuestro universo. Si deseas tener un detalle con nosotros, puedes elegir una de las siguientes opciones.")
+st.write("Tu presencia ilumina nuestro universo. Si deseas tener un detalle con nosotros, puedes elegir una de las opciones.")
 
 # 3. Datos de Regalos
 DATA_REGALOS = {
@@ -139,21 +145,21 @@ monto = st.radio(
 )
 
 # Mostrar la tarjeta centrada
-col1, col2, col3 = st.columns([0.2, 2, 0.2])
+col1, col2, col3 = st.columns([0.1, 2, 0.1])
 with col2:
     if os.path.exists(DATA_REGALOS[monto]["img"]):
         st.image(DATA_REGALOS[monto]["img"], use_container_width=True)
     else:
-        st.warning(f"Cargando imagen de {monto}... (Verifica que el archivo sea {DATA_REGALOS[monto]['img']})")
+        st.warning(f"Cargando imagen de {monto}... (Verifica que sea {DATA_REGALOS[monto]['img']})")
 
 # 5. Botón de Pago Mercado Pago
 url_pago = DATA_REGALOS[monto]["link"]
 st.markdown(f'''
     <a href="{url_pago}" target="_blank" style="text-decoration: none;">
         <div style="background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%); 
-                    color: #090A0F; padding: 18px; border-radius: 35px; 
-                    text-align: center; font-weight: bold; font-size: 22px; 
-                    margin: 15px 0px; box-shadow: 0px 5px 20px rgba(212, 175, 55, 0.4);">
+                    color: #090A0F; padding: 20px; border-radius: 40px; 
+                    text-align: center; font-weight: bold; font-size: 24px; 
+                    margin: 15px 0px; box-shadow: 0px 8px 25px rgba(212, 175, 55, 0.4);">
             Regalar Tarjeta de {monto} 💳
         </div>
     </a>
