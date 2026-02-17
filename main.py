@@ -104,7 +104,7 @@ except:
 # 3. Encabezado
 st.markdown('''
     <div class="header-container">
-        <p class="logo-text">C & J</p>
+        <p class="logo-text">Nuestro día</p>
         <p class="names-text">Joseline & Carlos</p>
     </div>
     ''', unsafe_allow_html=True)
