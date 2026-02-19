@@ -100,3 +100,26 @@ form_html = f"""
 
 # Usamos unsafe_allow_html=True para que se ejecute el código
 st.markdown(form_html, unsafe_allow_html=True)
+
+# --- ENLACE A MESA DE REGALOS ---
+st.divider()
+st.write("### 🎁 ¿Deseas ver nuestra mesa de regalos?")
+st.write("Si quieres tener un detalle con nosotros, puedes visitar nuestra mesa digital haciendo clic abajo:")
+
+# REEMPLAZA ESTE LINK con la URL de tu aplicación de Mesa de Regalos en Streamlit Cloud
+LINK_MESA_REGALOS = "https://tu-app-de-regalos.streamlit.app"
+
+st.markdown(f'''
+    <a href="{LINK_MESA_REGALOS}" target="_blank" style="text-decoration: none;">
+        <div style="background-color: rgba(212, 175, 55, 0.2); 
+                    color: #D4AF37; 
+                    padding: 15px; 
+                    border-radius: 30px; 
+                    text-align: center; 
+                    font-weight: bold; 
+                    border: 2px solid #D4AF37;
+                    transition: 0.3s;">
+            Ver Mesa de Regalos 💍
+        </div>
+    </a>
+    ''', unsafe_allow_html=True)
