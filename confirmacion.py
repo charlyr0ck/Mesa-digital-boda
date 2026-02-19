@@ -82,23 +82,21 @@ st.markdown('''
 
 st.subheader("📅 Confirmación de Asistencia")
 st.write("Es un honor para nosotros que nos acompañes en este día tan especial.")
-
-# 3. Formulario Simplificado
-ID_FORMSPREE_RSVP = "https://formspree.io/f/xqedlwwn" 
+# 3. Formulario Simplificado (Limpiado de indentación para evitar el cuadro de texto)
+ID_FORMSPREE_RSVP = "xlgwnwwz" 
 
 form_html = f"""
-    <form action="https://formspree.io/f/{ID_FORMSPREE_RSVP}" method="POST">
-        <label class="form-label">Tu Nombre:</label>
-        <input type="text" name="Nombre_Invitado" class="form-input" placeholder="Escribe tu nombre aquí" required>
-        
-        <label class="form-label">¿Contamos con tu presencia?</label>
-        <select name="Asistencia" class="form-input" style="background: #1B2735; color: white;">
-            <option value="Confirmado">¡Ahí estaré! ✨</option>
-            <option value="Declinado">Lamentablemente no podré ir</option>
-        </select>
-        
-        <button type="submit" class="form-button">Confirmar Asistencia 🥂</button>
-    </form>
+<form action="https://formspree.io/f/{ID_FORMSPREE_RSVP}" method="POST">
+<label class="form-label">Tu Nombre:</label>
+<input type="text" name="Nombre_Invitado" class="form-input" placeholder="Escribe tu nombre aquí" required>
+<label class="form-label">¿Contamos con tu presencia?</label>
+<select name="Asistencia" class="form-input" style="background: #1B2735; color: white; display: block; width: 100%;">
+<option value="Confirmado">¡Ahí estaré! ✨</option>
+<option value="Declinado">Lamentablemente no podré ir</option>
+</select>
+<button type="submit" class="form-button">Confirmar Asistencia 🥂</button>
+</form>
 """
 
+# Usamos unsafe_allow_html=True para que se ejecute el código
 st.markdown(form_html, unsafe_allow_html=True)
