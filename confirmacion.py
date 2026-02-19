@@ -75,7 +75,7 @@ st.markdown("""
 # 2. Encabezado
 st.markdown('''
     <div class="header-container">
-        <p class="names-text">Nos casamos y queremos que formes parte de la gran celebración</p>
+        <p class="names-text">Nos casamos</p>
         <p class="names-text">Joseline & Carlos</p>
     </div>
     ''', unsafe_allow_html=True)
@@ -83,7 +83,7 @@ st.markdown('''
 st.subheader("📅 Confirmación de Asistencia")
 st.write("Es un honor para nosotros que nos acompañes en este día tan especial.")
 # 3. Formulario Simplificado (Limpiado de indentación para evitar el cuadro de texto)
-ID_FORMSPREE_RSVP = "xlgwnwwz" 
+ID_FORMSPREE_RSVP = "xqedlwwn" 
 
 form_html = f"""
 <form action="https://formspree.io/f/{ID_FORMSPREE_RSVP}" method="POST">
