@@ -107,7 +107,7 @@ st.write("### 🎁 ¿Deseas ver nuestra mesa de regalos?")
 st.write("Si quieres tener un detalle con nosotros, puedes visitar nuestra mesa digital haciendo clic abajo:")
 
 # REEMPLAZA ESTE LINK con la URL de tu aplicación de Mesa de Regalos en Streamlit Cloud
-LINK_MESA_REGALOS = "https://bit.ly/3MLPLAQ"
+LINK_MESA_REGALOS = "https://mesa-digital-carlos-y-joseline.streamlit.app/#elige-el-monto-de-tu-regalo"
 
 st.markdown(f'''
     <a href="{LINK_MESA_REGALOS}" target="_blank" style="text-decoration: none;">
